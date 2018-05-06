@@ -188,6 +188,7 @@ replace `APExStmtChecker` with `APExFuncChecker` in the following directions:
   [binary directory]clang -cc1 -w -analyze -analyzer-opt-analyze-headers -analyzer-checker=alpha.unix.APExStmtChecker -I/usr/include -I[build directory]lib/clang/[version]/include/ [source file]
   ```
   c. The output file will have the suffix `.ae.log`.
+  
 2. A whole project:
   a. For every step in the build process (eg. ./configure and make),
   prepend the command with:
