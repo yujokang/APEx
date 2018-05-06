@@ -113,7 +113,7 @@ with
                      const char *sep,
                      SymbolRef Sym = NULL) = 0;
 ```
-5. Open `../Core/RangeConstraintManager.cpp`,
+6. Open `../Core/RangeConstraintManager.cpp`,
   and find the declaration of `print` in the `RangeConstraintManager` class,
   and add the `Sym` parameter again, ie.
   replace
@@ -140,7 +140,7 @@ void RangeConstraintManager::print(ProgramStateRef St, raw_ostream &Out,
     return;
   }
 ```
-6. Compile clang with the new checker:
+7. Compile clang with the new checker:
   Inside the build directory, enter `make clang`.
 
 ##Creating the function List
