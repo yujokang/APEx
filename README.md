@@ -1,6 +1,6 @@
-#APEx: Automated Tool for Generating Error Specifications
+# APEx: Automated Tool for Generating Error Specifications
 
-##What is APEx?
+## What is APEx?
 
 APEx is a tool that automatically generates error specifications
 for C API functions by analyzing its usage.
@@ -12,7 +12,7 @@ by [Yuan Kang](https://yujokang.github.io/),
 presented at the 2016 International Conference on
 Automated Software Engineering (ASE 2016).
 
-##Why is APEx useful?
+## Why is APEx useful?
 Enforcing correct error handling in C is difficult for programmers,
 as well as automated checking tools.
 Since C has no built-in error reporting mechanism,
@@ -33,7 +33,7 @@ for Libgcrypt, GnuTLS, GTK, libc, OpenSSL and zlib,
 and used the specifications to find error handling bugs
 in applications that use these libraries.
 
-##How does APEx work?
+## How does APEx work?
 APEx leverages the fact that error-handling code is more simple
 than regular code,
 and the availability of multiple applications using each library.
@@ -48,10 +48,10 @@ APEx has each application vote on the likely error specification
 of each API function,
 and chooses the specification with a significant plurality.
 
-#Installation and usage
+# Installation and usage
 
-##Prerequisites
-###CMake:
+## Prerequisites
+### CMake:
 If you are using Ubuntu, you might need a newer version of CMake
 than what you can get through apt-get.
 You can download the source at:
@@ -59,7 +59,7 @@ https://cmake.org/download/
 It can be built and installed using the standard
 `./configure; make; sudo make install`
 
-##LLVM and clang:
+## LLVM and clang:
 You can build the necessary parts of LLVM and clang at:
 http://clang.llvm.org/get_started.html
 It is not necessary to follow the optional steps 4-6.
@@ -72,7 +72,7 @@ you don't have to enter the binary directory in your commands.
 To analyze a single file, however, you still have to enter the build directory
 that contains the include folder.
 
-##Installing the Clang checker:
+## Installing the Clang checker:
 1. Go to the directory
 `[path to llvm source folder]tools/clang/lib/StaticAnalyzer/Checkers`
 2. Add the source files:
@@ -143,19 +143,19 @@ void RangeConstraintManager::print(ProgramStateRef St, raw_ostream &Out,
 7. Compile clang with the new checker:
   Inside the build directory, enter `make clang`.
 
-##Creating the function List
+## Creating the function List
 A file called `analyze_func_list.txt` needs to be in the directory
 in which you run the checker.
 It contains error specifications for fallible functions,
 as well as exit functions.
 
-###Entries
+### Entries
 1. Analyzed functions: `[function name]`
 2. Exit functions: `0[function name]`
 
-###Sample function lists
+### Sample function lists
 The sample list of analyzed functions are in `sample_lists`
-####Libraries
+#### Libraries
 The the error specifications for checking the internals of library code
 are stored in the following files, which you can use directly:
 * Libgcrypt: `analyze_func_list_gcrypt.txt`
@@ -167,15 +167,15 @@ are stored in the following files, which you can use directly:
 Concatenate it with the list of exit functions, `exit_functions`,
 in the same folder to use for the checker.
 
-###Usage:
-####Setup
+### Usage:
+#### Setup
 If you are running the checker on a programming project,
 you need to make sure that the function list is present in every directory
 in which the compiler will run.
 To create a link of the list file in every directory in the project folder,
 run `python utilities/setup.py [original list file] [project root path]`
 
-####Running the checker
+#### Running the checker
 It is recommended that you use `APExStmtChecker`,
 as the statement count is a better indicator of an error path
 than function call count.
@@ -197,11 +197,11 @@ replace `APExStmtChecker` with `APExFuncChecker` in the following directions:
   ```
   b. Run `python utilities/output_gatherer.py [combined output file] [project root path]`
 
-####Generating the error specification
+#### Generating the error specification
 Run `python analysis/run_analyses.py [output file] [per-program checker log files...]`.
 The error specifications will be in the output files,
 in lines prepended by `ErrorSpec:`.
 
-####A simple application of the error specification
+#### A simple application of the error specification
 Run `python analysis/check_specs.py [bug output folder] [error specification file] [per-program checker log files...].`
 The bug files are stored in the bug output folder. Their name will be the same as the corresponding log file, except with the `.bugs` extension, which replaces the extension of the original file name, if it exists.
