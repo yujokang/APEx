@@ -97,7 +97,7 @@ def APExStmtChecker : Checker<"APExStmtChecker">,
   DescFile<"APExStmt.cpp">;
 ```
 4. Register the source file to be compiled:
-Open CMakeLists.txt, look for the block starting with
+Open `CMakeLists.txt`, look for the block starting with
 `add_clang_library(`, and inside it,
 add the lines `APExFunc.cpp` and `APExStmt.cpp`.
 5. Open `../../../include/clang/StaticAnalyzer/Core/PathSensitive/ConstraintManager.h`, and look for the `print` function
