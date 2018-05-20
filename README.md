@@ -60,9 +60,13 @@ It can be built and installed using the standard
 `./configure; make; sudo make install`
 
 ## LLVM and clang:
-You can build the necessary parts of LLVM and clang at:
-http://clang.llvm.org/get_started.html
-It is not necessary to follow the optional steps 4-6.
+You can build the necessary parts of LLVM and clang by following the directions at:
+http://clang.llvm.org/get_started.html.
+It is necessary to follow Step 3, but it is not necessary to follow the optional Steps 4-6.
+Moreover, you do have to add the following flags to certain SVN commands to use the right versions:
+* In Step 2, add `-r 278752` to the SVN command in the second bullet point, ie. run `svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm -r 278752` instead of `svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm`
+* In Step 3, add `-r 278746` to the SVN command in the second bullet point, ie. run `svn co http://llvm.org/svn/llvm-project/cfe/trunk clang -r 278746` instead of `svn co http://llvm.org/svn/llvm-project/cfe/trunk clang`.
+
 To keep clang in your path, add the following line to `~/.bashrc`:
 `export PATH=[build directory]bin:$PATH`
 The rest of the instructions assume that you have not done this,
