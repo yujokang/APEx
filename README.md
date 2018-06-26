@@ -186,20 +186,14 @@ than function call count.
 If you do wish to use function count,
 replace `APExStmtChecker` with `APExFuncChecker` in the following directions:
 1. A single file:
-  a. Keep `analyze_func_list` in the current working directory
-  b. Enter:
-  ```
-  [binary directory]clang -cc1 -w -analyze -analyzer-opt-analyze-headers -analyzer-checker=alpha.unix.APExStmtChecker -I/usr/include -I[build directory]lib/clang/[version]/include/ [source file]
-  ```
-  c. The output file will have the suffix `.ae.log`.
+   1. Keep `analyze_func_list` in the current working directory
+   1. Enter: `[binary directory]clang -cc1 -w -analyze -analyzer-opt-analyze-headers -analyzer-checker=alpha.unix.APExStmtChecker -I/usr/include -I[build directory]lib/clang/[version]/include/ [source file]`
+   1. The output file will have the suffix `.ae.log`.
   
-2. A whole project:
-  a. For every step in the build process (eg. ./configure and make),
-  prepend the command with:
-  ```
-  [binary directory]scan-build -enable-checker alpha.unix.APExStmtChecker -analyze-headers --use-analyzer [binary directory]clang
-  ```
-  b. Run `python utilities/output_gatherer.py [combined output file] [project root path]`
+1. A whole project:
+   1. For every step in the build process (eg. ./configure and make),
+   prepend the command with: `[binary directory]scan-build -enable-checker alpha.unix.APExStmtChecker -analyze-headers --use-analyzer [binary directory]clang`
+   1. Run `python utilities/output_gatherer.py [combined output file] [project root path]`
 
 #### Generating the error specification
 Run `python analysis/run_analyses.py [output file] [per-program checker log files...]`.
